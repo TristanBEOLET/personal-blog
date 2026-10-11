@@ -1,8 +1,8 @@
 ---
 title: "Paper: End-to-end Offline Reinforcement Learning for Glycemia Control"
-date: 2026-10-11
+date: 2023-10-16
 draft: false
-tags: ["paper", "offline rl", "diabetes"]
+tags: ["rl", "paper"]
 description: "My first paper: training offline RL agents on real closed-loop data for type 1 diabetes, and personalizing them per patient without a simulator."
 ---
 
@@ -59,6 +59,7 @@ the worst cases improved most, with the lowest estimated time in range going fro
 ## Read more
 
 - Paper: [arXiv:2310.10312](https://arxiv.org/abs/2310.10312)
+- Code: [offline RL agents on GitHub](https://github.com/TristanBEOLET/offline-RL/tree/main/offlinerl/algorithms)
 
 ## Citation
 
