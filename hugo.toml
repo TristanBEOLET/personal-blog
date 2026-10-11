@@ -1,0 +1,42 @@
+baseURL = "https://blog.tbeolet.com/"
+locale = "en-us"
+title = "Tristan Beolet"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true
+  ShowToc = true
+  ShowCodeCopyButtons = true
+  ShowPostNavLinks = true
+  math = true
+
+  [params.assets]
+    favicon = "/favicon.svg"
+
+  [params.homeInfoParams]
+    Title = "Notes on robots and learning agents"
+    Content = "Write-ups of things I build, break and fix."
+
+  [[params.socialIcons]]
+    name = "github"
+    url = "https://github.com/TristanBEOLET"
+  [[params.socialIcons]]
+    name = "linkedin"
+    url = "https://www.linkedin.com/in/tristan-beolet"
+
+[menu]
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 1
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+
+[markup.goldmark.extensions.passthrough]
+  enable = true
+  [markup.goldmark.extensions.passthrough.delimiters]
+    block = [['\[', '\]'], ['$$', '$$']]
+    inline = [['\(', '\)'], ['$', '$']]

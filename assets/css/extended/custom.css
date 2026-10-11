@@ -1,0 +1,80 @@
+:root {
+  --theme: #fbfaf6;
+  --entry: #fbfaf6;
+  --primary: #1d2420;
+  --secondary: #5d665f;
+  --tertiary: #e4e2da;
+  --content: #262d28;
+  --code-block-bg: #1b221e;
+  --code-bg: #eeefe7;
+  --border: #e4e2da;
+  --accent: #1F7D53;
+}
+
+.dark, :root[data-theme="dark"] {
+  --theme: #141815;
+  --entry: #141815;
+  --primary: #e6e8e2;
+  --secondary: #a3aba2;
+  --tertiary: #2a312b;
+  --content: #d6dad3;
+  --code-block-bg: #0d100e;
+  --code-bg: #1e241f;
+  --border: #2a312b;
+  --accent: #4E9F3D;
+}
+
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+code, pre { font-family: "JetBrains Mono", ui-monospace, monospace; }
+
+h1, h2, h3, .post-title, .entry-header h2, .logo a {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+}
+
+/* PaperMod tints list pages with --code-bg in light mode; keep the paper background */
+.list { background: var(--theme); }
+
+.post-entry {
+  background: transparent;
+  border: none;
+  border-top: 1px solid var(--border);
+  border-radius: 0;
+  margin-bottom: 0;
+  padding: 32px 0;
+}
+.post-entry:active { transform: none; }
+.post-entry:hover .entry-header h2 { color: var(--accent); }
+
+.post-content a {
+  color: var(--accent);
+  box-shadow: none;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+.post-content a:hover { text-decoration-thickness: 2px; }
+
+/* PaperMod marks the active menu item with a text underline, not a border */
+#menu .active { color: var(--accent); text-decoration-color: var(--accent); }
+
+.meta-tags { margin-left: 8px; }
+
+.meta-tag,
+.post-tags a {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 1px 8px;
+  margin: 2px 4px 2px 0;
+  border: none;
+  border-radius: 6px;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.post-tags a:hover {
+  background: color-mix(in srgb, var(--accent) 22%, transparent);
+}
+
+::selection { background: var(--accent); color: #fff; }
