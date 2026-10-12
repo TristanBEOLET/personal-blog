@@ -78,3 +78,8 @@ h1, h2, h3, .post-title, .entry-header h2, .logo a {
 }
 
 ::selection { background: var(--accent); color: #fff; }
+
+.post-content figure.video video {
+  width: 100%;
+  border-radius: 6px;
+}

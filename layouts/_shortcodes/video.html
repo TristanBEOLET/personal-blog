@@ -1,0 +1,12 @@
+{{- /* Usage: {{< video src="clip.mp4" poster="clip.jpg" caption="..." >}}. src and poster are page resources. */ -}}
+{{- $src := .Page.Resources.Get (.Get "src") -}}
+{{- $poster := "" -}}
+{{- with .Get "poster" }}{{ with $.Page.Resources.Get . }}{{ $poster = .RelPermalink }}{{ end }}{{ end -}}
+<figure class="video">
+  <video controls muted loop playsinline preload="metadata"{{ with $poster }} poster="{{ . }}"{{ end }}>
+    <source src="{{ $src.RelPermalink }}" type="video/mp4">
+  </video>
+  {{- with .Get "caption" }}
+  <figcaption>{{ . | markdownify }}</figcaption>
+  {{- end }}
+</figure>
