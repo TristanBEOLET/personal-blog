@@ -3,8 +3,8 @@ title: "About"
 draft: false
 ---
 
-I'm Tristan Beolet. I work on AI, robotics and reinforcement learning, and I run a homelab on
-the side. This blog is where I write up the things I build, break and fix along the way.
+I'm Tristan Beolet. I work on AI, robotics and reinforcement learning. Outside of work, I tinker
+with my homelab. This blog is where I write up the things I build, break and fix along the way.
 
 Expect notes on training agents, getting policies to behave on real hardware, and the tooling
 in between, plus homelab write-ups: self-hosted services, servers, networking and the
