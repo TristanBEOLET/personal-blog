@@ -15,8 +15,8 @@ theme = "PaperMod"
     favicon = "/favicon.svg"
 
   [params.homeInfoParams]
-    Title = "Notes on robots and learning agents"
-    Content = "Write-ups of things I build, break and fix."
+    Title = "Write-ups of things I build, break and fix"
+    Content = "AI, robotics, reinforcement learning and homelabbing."
 
   [[params.socialIcons]]
     name = "github"
