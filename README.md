@@ -40,6 +40,21 @@ description: "One-line summary, used for SEO."
 - Math uses LaTeX: `$...$` or `\(...\)` inline, `$$...$$` or `\[...\]` for display (rendered by MathJax).
 - Put `<!--more-->` after the intro to control the summary shown in the post list.
 - Code for project posts lives in separate repositories, linked from the post.
+- Videos: put the `.mp4` in the page bundle and use `{{< video src="clip.mp4" poster="clip.jpg" caption="..." >}}`.
+
+### Series
+
+Posts that belong together share a `series` entry in their front matter:
+
+```yaml
+series: ["SO-100 tower stacking"]
+linkTitle: "Does a reverse curriculum help?"   # short title used in the series box and page
+```
+
+- Each post of a series gets a box at the top listing every part, in date order.
+- `/series/` lists all series; `/series/<name>/` lists one series' posts, oldest first.
+- To give a series a title and description, add `content/series/<urlized-name>/_index.md`
+  (e.g. `content/series/so-100-tower-stacking/_index.md`).
 
 ## Layout
 
@@ -47,7 +62,10 @@ description: "One-line summary, used for SEO."
 |---|---|
 | `hugo.toml` | Site configuration |
 | `content/` | Posts and pages |
-| `layouts/_partials/` | Overrides of PaperMod partials (fonts, MathJax, tags in post list) |
+| `layouts/_partials/` | Overrides of PaperMod partials (fonts, MathJax, tags in post list) and the series box (`series_nav.html`) |
+| `layouts/single.html` | Copy of PaperMod's `single.html` with one added line: the series box. Re-check it after a theme update |
+| `layouts/series/` | `/series/` and series pages (posts in reading order) |
+| `layouts/_shortcodes/` | `video` shortcode |
 | `assets/css/extended/custom.css` | Custom styles (colors, fonts, post list) |
 | `static/` | Files copied as-is (favicon) |
 | `themes/PaperMod/` | Theme submodule — never edit; override by mirroring paths instead |

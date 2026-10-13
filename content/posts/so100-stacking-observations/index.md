@@ -1,16 +1,14 @@
 ---
 title: "Stacking cubes with an SO-100, part 3: what does the agent need to see?"
+linkTitle: "What does the agent need to see?"
 date: 2026-10-12T08:20:00+02:00
 draft: false
+series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "observation-space"]
 description: "An observation-space study on a three-cube stacking task: removing the cube orientations took success from 88% to 97% and made learning 3× faster."
 ---
 
-Third post of the series about teaching a simulated SO-100 arm to build a three-cube tower:
-
-1. [Back to RL, the setup, and a bug that wasn't in the reward]({{< relref "posts/so100-stacking-setup" >}})
-2. [Does a reverse curriculum help?]({{< relref "posts/so100-stacking-curriculum" >}})
-3. **What does the agent need to see?** (this post)
+Third post of the series about teaching a simulated SO-100 arm to build a three-cube tower.
 
 The observation is the one design choice every RL environment makes, and the one I had thought
 about least. In this post I take the best training setup from part 2 and ask what the

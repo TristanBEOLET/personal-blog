@@ -267,6 +267,8 @@ latest stable release); checkout with `submodules: recursive` and `fetch-depth: 
   (never change it once posts are shared).
 - Each post lives as a single Markdown file or a page bundle folder with its images.
 - Front matter: `title`, `date`, `tags`, `draft`, optional `description` (used for SEO).
+- Multi-part posts: same `series: ["<name>"]` in each, plus a short `linkTitle`; parts are ordered by
+  date. Series title and description go in `content/series/<urlized-name>/_index.md`.
 - Prefer standard Markdown; use Hugo shortcodes only when they add real value.
 - Link the code repo for any project-based post.
 - Preview locally with `hugo server -D`.

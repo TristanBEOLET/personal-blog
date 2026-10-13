@@ -1,0 +1,22 @@
+{{- /* Box listing the other parts of the post's series, oldest first. Series are set with `series: ["Name"]` in front matter. */ -}}
+{{- range .GetTerms "series" }}
+{{- $parts := .Pages.ByDate }}
+{{- $current := $.Page }}
+{{- $index := 0 }}
+{{- range $i, $p := $parts }}{{ if eq $p $current }}{{ $index = add $i 1 }}{{ end }}{{ end }}
+<nav class="series-nav" aria-label="Series">
+  <p class="series-nav-title">
+    Part {{ $index }} of {{ len $parts }} in the series
+    <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+  </p>
+  <ol>
+    {{- range $parts }}
+    {{- if eq . $current }}
+    <li class="series-nav-current" aria-current="page">{{ .LinkTitle }}</li>
+    {{- else }}
+    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{- end }}
+    {{- end }}
+  </ol>
+</nav>
+{{- end }}

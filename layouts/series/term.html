@@ -1,0 +1,25 @@
+{{- /* One series: its parts in reading order (oldest first), unlike PaperMod's newest-first lists. */ -}}
+{{- define "main" }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- range $i, $p := .Pages.ByDate }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2><span class="series-part">Part {{ add $i 1 }}</span> {{ $p.LinkTitle }}</h2>
+  </header>
+  <div class="entry-content">
+    <p>{{ $p.Summary | plainify | htmlUnescape }}{{ if $p.Truncated }}...{{ end }}</p>
+  </div>
+  <footer class="entry-footer">
+    {{- partial "post_meta.html" $p -}}
+  </footer>
+  <a class="entry-link" aria-label="post link to {{ $p.Title | plainify }}" href="{{ $p.Permalink }}"></a>
+</article>
+{{- end }}
+{{- end }}
