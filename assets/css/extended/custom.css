@@ -83,3 +83,30 @@ h1, h2, h3, .post-title, .entry-header h2, .logo a {
   width: 100%;
   border-radius: 6px;
 }
+
+.series-nav {
+  margin: 0 0 24px;
+  padding: 14px 18px;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: color-mix(in srgb, var(--accent) 7%, transparent);
+  font-size: 15px;
+}
+.series-nav-title { margin: 0 0 6px; color: var(--secondary); }
+.series-nav-title a { color: var(--accent); font-weight: 600; }
+.series-nav ol { margin: 0; padding-left: 22px; }
+.series-nav li { margin: 2px 0; }
+.series-nav li a { color: var(--content); }
+.series-nav li a:hover { color: var(--accent); }
+.series-nav-current { font-weight: 600; color: var(--primary); }
+
+.series-part {
+  display: block;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 4px;
+}

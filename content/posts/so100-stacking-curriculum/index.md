@@ -1,16 +1,14 @@
 ---
 title: "Stacking cubes with an SO-100, part 2: does a reverse curriculum help?"
+linkTitle: "Does a reverse curriculum help?"
 date: 2026-10-12T08:10:00+02:00
 draft: false
+series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "curriculum"]
 description: "Curriculum vs no curriculum on a three-cube stacking task, 5 seeds each: the easy start states matter, the schedule doesn't."
 ---
 
-Second post of the series about teaching a simulated SO-100 arm to build a three-cube tower:
-
-1. [Back to RL, the setup, and a bug that wasn't in the reward]({{< relref "posts/so100-stacking-setup" >}})
-2. **Does a reverse curriculum help?** (this post)
-3. [What does the agent need to see?]({{< relref "posts/so100-stacking-observations" >}})
+Second post of the series about teaching a simulated SO-100 arm to build a three-cube tower.
 
 Curriculum learning was the thing I most wanted to try in this project. The question here is
 simple: on this task, does it actually help? The answer turned out to be "yes, but not for the

@@ -1,0 +1,28 @@
+{{- /* /series/: one entry per series, most recently updated first. */ -}}
+{{- define "main" }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- range .Pages.ByLastmod.Reverse }}
+{{- $parts := .Pages.ByDate }}
+<article class="post-entry">
+  <header class="entry-header">
+    <h2>{{ .Title }}</h2>
+  </header>
+  {{- with .Description }}
+  <div class="entry-content">
+    <p>{{ . | plainify }}</p>
+  </div>
+  {{- end }}
+  <footer class="entry-footer">
+    {{ len $parts }} parts · latest {{ partial "series_date.html" (index $parts.Reverse 0) }}
+  </footer>
+  <a class="entry-link" aria-label="series {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+</article>
+{{- end }}
+{{- end }}

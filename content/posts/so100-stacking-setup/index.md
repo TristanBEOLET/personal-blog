@@ -1,17 +1,15 @@
 ---
 title: "Stacking cubes with an SO-100, part 1: back to RL, and a bug that wasn't in the reward"
+linkTitle: "Back to RL, the setup, and a bug that wasn't in the reward"
 date: 2026-10-12T08:00:00+02:00
 draft: false
+series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "mujoco"]
 description: "Why I trained a simulated SO-100 arm to build a three-cube tower with PPO, how the setup works, and how a physics setting silently broke training for days."
 ---
 
 This is the first post of a series about teaching a simulated SO-100 robot arm to build a
-three-cube tower with reinforcement learning:
-
-1. **Back to RL, the setup, and a bug that wasn't in the reward** (this post)
-2. [Does a reverse curriculum help?]({{< relref "posts/so100-stacking-curriculum" >}})
-3. [What does the agent need to see?]({{< relref "posts/so100-stacking-observations" >}})
+three-cube tower with reinforcement learning.
 
 The code, the run logs and the raw notes are in
 [TristanBEOLET/mujoco-rl](https://github.com/TristanBEOLET/mujoco-rl/tree/main/scripts/so100_stack_curriculum).
