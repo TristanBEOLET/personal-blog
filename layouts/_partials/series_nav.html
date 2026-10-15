@@ -1,12 +1,17 @@
-{{- /* Box listing the other parts of the post's series, oldest first. Series are set with `series: ["Name"]` in front matter. */ -}}
+{{- /* Box listing the parts of the post's series, oldest first, then any appendices. Series are set with `series: ["Name"]` in front matter; an appendix also sets `seriesAppendix: true`. */ -}}
 {{- range .GetTerms "series" }}
-{{- $parts := .Pages.ByDate }}
+{{- $pages := partial "series_pages.html" . }}
+{{- $parts := $pages.parts }}
 {{- $current := $.Page }}
 {{- $index := 0 }}
 {{- range $i, $p := $parts }}{{ if eq $p $current }}{{ $index = add $i 1 }}{{ end }}{{ end }}
 <nav class="series-nav" aria-label="Series">
   <p class="series-nav-title">
+    {{- if $index }}
     Part {{ $index }} of {{ len $parts }} in the series
+    {{- else }}
+    Appendix to the series
+    {{- end }}
     <a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
   </p>
   <ol>
@@ -18,5 +23,16 @@
     {{- end }}
     {{- end }}
   </ol>
+  {{- with $pages.appendices }}
+  <ul class="series-nav-appendices">
+    {{- range . }}
+    {{- if eq . $current }}
+    <li class="series-nav-current" aria-current="page">{{ .LinkTitle }}</li>
+    {{- else }}
+    <li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>
+    {{- end }}
+    {{- end }}
+  </ul>
+  {{- end }}
 </nav>
 {{- end }}

@@ -269,6 +269,8 @@ latest stable release); checkout with `submodules: recursive` and `fetch-depth: 
 - Front matter: `title`, `date`, `tags`, `draft`, optional `description` (used for SEO).
 - Multi-part posts: same `series: ["<name>"]` in each, plus a short `linkTitle`; parts are ordered by
   date. Series title and description go in `content/series/<urlized-name>/_index.md`.
+  A companion post (e.g. a theory appendix) joins the series with `seriesAppendix: true`: it is listed
+  after the numbered parts and doesn't get a part number.
 - Prefer standard Markdown; use Hugo shortcodes only when they add real value.
 - Link the code repo for any project-based post.
 - Preview locally with `hugo server -D`.

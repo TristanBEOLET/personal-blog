@@ -136,3 +136,4 @@ h1, h2, h3, .post-title, .entry-header h2, .logo a {
 .searchResults li:hover,
 .searchResults li:focus-within { transform: none; color: var(--accent); }
 .searchResults li .entry-link:focus { outline-color: var(--accent); }
+.series-nav-appendices { margin: 4px 0 0; padding-left: 22px; list-style: none; }

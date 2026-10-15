@@ -1,4 +1,4 @@
-{{- /* One series: its parts in reading order (oldest first), unlike PaperMod's newest-first lists. */ -}}
+{{- /* One series: its parts in reading order (oldest first), unlike PaperMod's newest-first lists, then any appendices. */ -}}
 {{- define "main" }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
@@ -8,10 +8,16 @@
   {{- end }}
 </header>
 
-{{- range $i, $p := .Pages.ByDate }}
+{{- $pages := partial "series_pages.html" . }}
+{{- $nparts := len $pages.parts }}
+{{- range $i, $p := $pages.all }}
 <article class="post-entry">
   <header class="entry-header">
+    {{- if lt $i $nparts }}
     <h2><span class="series-part">Part {{ add $i 1 }}</span> {{ $p.LinkTitle }}</h2>
+    {{- else }}
+    <h2><span class="series-part">Appendix</span> {{ strings.FirstUpper (strings.TrimPrefix "Appendix: " $p.Title) }}</h2>
+    {{- end }}
   </header>
   <div class="entry-content">
     <p>{{ $p.Summary | plainify | htmlUnescape }}{{ if $p.Truncated }}...{{ end }}</p>

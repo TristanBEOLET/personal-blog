@@ -2,6 +2,8 @@
 title: "Appendix: how PPO works, and how Brax implements it"
 linkTitle: "Appendix: how PPO works"
 date: 2026-10-15T11:00:00+02:00
+series: ["SO-100 tower stacking"]
+seriesAppendix: true
 draft: false
 tags: ["rl", "ppo", "theory"]
 description: "The theory behind the SO-100 stacking series: policy gradients, advantages and GAE, the clipped PPO objective, squashed Gaussian actions, and where Brax's implementation differs from the textbook and from Stable-Baselines3."

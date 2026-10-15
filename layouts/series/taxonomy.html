@@ -9,7 +9,7 @@
 </header>
 
 {{- range .Pages.ByLastmod.Reverse }}
-{{- $parts := .Pages.ByDate }}
+{{- $pages := partial "series_pages.html" . }}
 <article class="post-entry">
   <header class="entry-header">
     <h2>{{ .Title }}</h2>
@@ -20,7 +20,7 @@
   </div>
   {{- end }}
   <footer class="entry-footer">
-    {{ len $parts }} parts · latest {{ partial "series_date.html" (index $parts.Reverse 0) }}
+    {{ len $pages.parts }} parts{{ with $pages.appendices }} + {{ len . }} appendix{{ end }} · latest {{ partial "series_date.html" (index .Pages.ByDate.Reverse 0) }}
   </footer>
   <a class="entry-link" aria-label="series {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>

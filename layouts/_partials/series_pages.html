@@ -1,0 +1,5 @@
+{{- /* Takes a series term page. Returns its numbered parts (oldest first) and its appendices
+  (posts with `seriesAppendix: true`, oldest first), plus both in reading order. */ -}}
+{{- $parts := where .Pages.ByDate "Params.seriesAppendix" "!=" true }}
+{{- $appendices := where .Pages.ByDate "Params.seriesAppendix" true }}
+{{- return dict "parts" $parts "appendices" $appendices "all" ($parts | append $appendices) }}
