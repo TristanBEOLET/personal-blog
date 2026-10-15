@@ -17,6 +17,12 @@ The code, the run logs and the raw notes are in
 
 <!--more-->
 
+> **TL;DR**
+>
+> - I trained a simulated SO-100 arm with PPO in MuJoCo/MJX to build a three-cube tower, with a staged reward and a reverse curriculum.
+> - Training stalled for days, and the reward wasn't the cause. Stiffer contacts with too few solver iterations threw cubes up to 216 m away in ~3% of episodes, which poisoned the observation normalizer.
+> - Training with a learning rate of 0 exposed it: the policy got worse with frozen weights (59% → 0%). With 10 solver iterations, the run reached 73% finished towers on the full task.
+
 {{< video src="stack_tower.mp4" poster="stack_tower.jpg" caption="The best policy on the full task: blue cube on the orange one, green on top, let go, move away. Three episodes with random cube positions." >}}
 
 ## Why this project
@@ -58,7 +64,7 @@ So the goals were:
 
 Being clear about this from the start: **Claude (Claude Code) wrote most of the code.** Writing
 PPO or an MJX environment from scratch wasn't the point of the project. The point was to
-understand RL and simulators better, and to practise the evaluation methods used in papers.
+understand RL and simulators better, and to practice the evaluation methods used in papers.
 
 I came up with the questions and the studies: "what if we don't use a curriculum at all?",
 "what if the agent didn't see the cube orientations?". I decided what to test, read the
@@ -164,7 +170,7 @@ Before that, it had to work at all.
 The first run trained from scratch for 200M steps and ran out of budget before the full task,
 at the level where both cubes start on the floor near the base. It stacked blue within 3
 seconds, but never got green on top. No level
-started from "blue just placed", so the policy never practised letting go of blue and turning
+started from "blue just placed", so the policy never practiced letting go of blue and turning
 to green. I added two levels (now levels 1 and 4 above) and restarted from that run's policy.
 
 Levels 1 to 3 were promoted in 15M steps. Then level 4 (blue held above the base) stayed at
@@ -240,7 +246,7 @@ barely moved. Joints, orientations and the other features were unchanged.
 A large change in variance with a flat mean is the signature of a few huge values. With $N$
 samples already averaged, one new sample at a distance $d$ from the mean moves the mean by about
 $d/N$, but the variance by about $d^2/N$. After 162M samples, one cube 1 km away shifts the mean
-by 6 µm and adds 0.006 m² to the variance. Cube positions normally vary by a few centimetres.
+by 6 µm and adds 0.006 m² to the variance. Cube positions normally vary by a few centimeters.
 
 So **cubes were being thrown out of the scene.** I counted over 2048 episodes per level: in
 about **3% of episodes**, a cube flew away, up to **216 m at 60 m/s**. No NaN came out of it, so
@@ -324,8 +330,9 @@ If you plan studies with seeds rather than single runs, budget for it, or borrow
 Most of what I used came from what I already knew and from discussions with Claude, so this
 isn't a reading list I followed. It's what I'd point someone to for this kind of project:
 
-- **RL foundations:** Sutton and Barto, *Reinforcement Learning: An Introduction* (free online).
-  For PPO specifically, OpenAI's [Spinning Up](https://spinningup.openai.com/) explains it
+- **RL foundations:** Sutton and Barto,
+  [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html)
+  (free online). For PPO specifically, OpenAI's [Spinning Up](https://spinningup.openai.com/) explains it
   clearly.
 - **Simulation:** the [MuJoCo documentation](https://mujoco.readthedocs.io/) (the sections on
   contacts and the solver are worth reading *before* tuning `solref`),
@@ -338,12 +345,15 @@ isn't a reading list I followed. It's what I'd point someone to for this kind of
 - **Reference tasks:** [robosuite](https://robosuite.ai/) and
   [ManiSkill](https://github.com/haosulab/ManiSkill) have stacking tasks. Their observations and
   rewards are good to compare against.
-- **Curriculum:** Florensa et al. (2017), *Reverse Curriculum Generation for Reinforcement
-  Learning*, and the survey by Narvekar et al. (2020), *Curriculum Learning for Reinforcement
-  Learning Domains*.
-- **Evaluation:** Agarwal et al. (2021), *Deep Reinforcement Learning at the Edge of the
-  Statistical Precipice*, and Henderson et al. (2018), *Deep Reinforcement Learning that
-  Matters*. They shaped how the next two posts compare runs.
+- **Curriculum:** Florensa et al. (2017),
+  [*Reverse Curriculum Generation for Reinforcement Learning*](https://arxiv.org/abs/1707.05300),
+  and the survey by Narvekar et al. (2020),
+  [*Curriculum Learning for Reinforcement Learning Domains*](https://jmlr.org/papers/v21/20-212.html).
+- **Evaluation:** Agarwal et al. (2021),
+  [*Deep Reinforcement Learning at the Edge of the Statistical Precipice*](https://arxiv.org/abs/2108.13264),
+  and Henderson et al. (2018),
+  [*Deep Reinforcement Learning that Matters*](https://arxiv.org/abs/1709.06560).
+  They shaped how the next two posts compare runs.
 
 ## Next
 

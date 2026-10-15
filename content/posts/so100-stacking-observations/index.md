@@ -17,6 +17,12 @@ observation should contain. The biggest win came from *removing* something.
 
 <!--more-->
 
+> **TL;DR**
+>
+> - 13 observation variants screened with 2 seeds each, the promising ones confirmed with 5.
+> - Removing the 18 cube-orientation numbers was the biggest win: 97% finished towers instead of 88%, and 10% success three times sooner (30M vs 91M steps).
+> - Contact flags speed learning up but don't raise the final success, and permutation importance on trained policies pointed the wrong way.
+
 As before: I designed the study and read the results, Claude wrote most of the code and the
 analysis scripts. Everything is in
 [the repo](https://github.com/TristanBEOLET/mujoco-rl/tree/main/scripts/so100_stack_curriculum),
@@ -210,7 +216,7 @@ mattered:
 5. **More inputs can hurt.** Size and redundancy matter, not only information content.
 
 **Caveats.** The `base` runs come from part 2 and trained for 200M steps; their final numbers use
-the 200M checkpoint, which favours `base`, so the gaps are if anything understated. The
+the 200M checkpoint, which favors `base`, so the gaps are if anything understated. The
 `grasp-yaw` encoding is wrong for a cube resting on another face, which is rare but can happen
 with a tilted held cube. And all of this is one task, with one algorithm.
 
@@ -237,19 +243,19 @@ $0.97^{100} \approx 0.05$.
 
 ## References
 
-- Zhu et al. (2020). *robosuite: A Modular Simulation Framework and Benchmark for Robot
-  Learning.* arXiv:2009.12293.
-- Tao et al. (2024). *ManiSkill3: GPU Parallelized Robotics Simulation and Rendering for
-  Generalizable Embodied AI.* arXiv:2410.00425.
-- Pinto, Andrychowicz, Welinder, Zaremba, Abbeel (2018). *Asymmetric Actor Critic for
-  Image-Based Robot Learning.* RSS.
-- Pardo, Tavakoli, Levdik, Kormushev (2018). *Time Limits in Reinforcement Learning.* ICML.
-- Zhou, Barnes, Lu, Yang, Li (2019). *On the Continuity of Rotation Representations in Neural
-  Networks.* CVPR.
-- Andrychowicz et al. (2021). *What Matters for On-Policy Deep Actor-Critic Methods? A
-  Large-Scale Study.* ICLR.
-- Fisher, Rudin, Dominici (2019). *All Models are Wrong, but Many are Useful.* JMLR.
-- Alain, Bengio (2016). *Understanding intermediate layers using linear classifier probes.*
+- Zhu et al. (2020). [*robosuite: A Modular Simulation Framework and Benchmark for Robot
+  Learning.*](https://arxiv.org/abs/2009.12293) arXiv:2009.12293.
+- Tao et al. (2024). [*ManiSkill3: GPU Parallelized Robotics Simulation and Rendering for
+  Generalizable Embodied AI.*](https://arxiv.org/abs/2410.00425) arXiv:2410.00425.
+- Pinto, Andrychowicz, Welinder, Zaremba, Abbeel (2018). [*Asymmetric Actor Critic for
+  Image-Based Robot Learning.*](https://arxiv.org/abs/1710.06542) RSS.
+- Pardo, Tavakoli, Levdik, Kormushev (2018). [*Time Limits in Reinforcement Learning.*](https://arxiv.org/abs/1712.00378) ICML.
+- Zhou, Barnes, Lu, Yang, Li (2019). [*On the Continuity of Rotation Representations in Neural
+  Networks.*](https://arxiv.org/abs/1812.07035) CVPR.
+- Andrychowicz et al. (2021). [*What Matters for On-Policy Deep Actor-Critic Methods? A
+  Large-Scale Study.*](https://arxiv.org/abs/2006.05990) ICLR.
+- Fisher, Rudin, Dominici (2019). [*All Models are Wrong, but Many are Useful.*](https://arxiv.org/abs/1801.01489) JMLR.
+- Alain, Bengio (2016). [*Understanding intermediate layers using linear classifier probes.*](https://arxiv.org/abs/1610.01644)
   arXiv:1610.01644.
-- Agarwal et al. (2021). *Deep Reinforcement Learning at the Edge of the Statistical
-  Precipice.* NeurIPS.
+- Agarwal et al. (2021). [*Deep Reinforcement Learning at the Edge of the Statistical
+  Precipice.*](https://arxiv.org/abs/2108.13264) NeurIPS.

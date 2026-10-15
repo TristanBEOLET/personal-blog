@@ -17,6 +17,12 @@ reason I thought".
 
 <!--more-->
 
+> **TL;DR**
+>
+> - Three setups, 5 seeds × 200M steps each: a scheduled reverse curriculum, the full task only, and uniform starts (half the episodes from a random easier level).
+> - Full task only is a lottery: 1 seed in 5 learns. The curriculum reaches 78% finished towers; uniform starts reaches 88%, every seed above every curriculum seed.
+> - The benefit comes from the easy start states, not from the schedule.
+
 As in the rest of the series, I designed the study and Claude wrote most of the code and
 analysis scripts. Everything is in
 [the repo](https://github.com/TristanBEOLET/mujoco-rl/tree/main/scripts/so100_stack_curriculum),
@@ -204,11 +210,11 @@ to matter more than anything in this post.
 
 ## References
 
-- Florensa, Held, Wulfmeier, Zhang, Abbeel (2017). *Reverse Curriculum Generation for
-  Reinforcement Learning.* CoRL.
-- Narvekar, Peng, Leonetti, Sinapov, Taylor, Stone (2020). *Curriculum Learning for
-  Reinforcement Learning Domains: A Framework and Survey.* JMLR.
-- Agarwal, Schwarzer, Castro, Courville, Bellemare (2021). *Deep Reinforcement Learning at the
-  Edge of the Statistical Precipice.* NeurIPS.
-- Henderson, Islam, Bachman, Pineau, Precup, Meger (2018). *Deep Reinforcement Learning that
-  Matters.* AAAI.
+- Florensa, Held, Wulfmeier, Zhang, Abbeel (2017). [*Reverse Curriculum Generation for
+  Reinforcement Learning.*](https://arxiv.org/abs/1707.05300) CoRL.
+- Narvekar, Peng, Leonetti, Sinapov, Taylor, Stone (2020). [*Curriculum Learning for
+  Reinforcement Learning Domains: A Framework and Survey.*](https://jmlr.org/papers/v21/20-212.html) JMLR.
+- Agarwal, Schwarzer, Castro, Courville, Bellemare (2021). [*Deep Reinforcement Learning at the
+  Edge of the Statistical Precipice.*](https://arxiv.org/abs/2108.13264) NeurIPS.
+- Henderson, Islam, Bachman, Pineau, Precup, Meger (2018). [*Deep Reinforcement Learning that
+  Matters.*](https://arxiv.org/abs/1709.06560) AAAI.

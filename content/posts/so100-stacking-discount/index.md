@@ -17,6 +17,12 @@ was wrong, and finding out why turned out to be the most interesting part of the
 
 <!--more-->
 
+> **TL;DR**
+>
+> - γ = 0.95, 0.97 and 0.99 (plus 0.99 without reward scaling), 5 seeds × 150M steps each. I predicted 0.99 would win.
+> - 0.97 is best (97% finished towers). 0.95 is reliable but slower (90%). 0.99 is a lottery (58%, 3 seeds of 5).
+> - The failing 0.99 runs freeze, holding the green cube above the tower: the critic undervalues the rarely seen states after a release, so releasing gets a negative advantage.
+
 As in the rest of the series: I designed the study and read the results, Claude wrote most of
 the code and the analysis scripts. Everything is in
 [the repo](https://github.com/TristanBEOLET/mujoco-rl/tree/main/scripts/so100_stack_curriculum),
@@ -153,7 +159,7 @@ cube and stacking it. I first read it as an exploration problem.
 The skill map said otherwise. It shows success at every curriculum level, and the level that
 matters is the easiest one:
 
-{{< figure src="level_0.png" alt="Simulated SO-100 arm holding the green cube in its jaw just above a two-cube tower" caption="Level 0: the green cube is already in the jaw, a few centimetres above the tower. All that's left is to lower it, open the jaw and move away." >}}
+{{< figure src="level_0.png" alt="Simulated SO-100 arm holding the green cube in its jaw just above a two-cube tower" caption="Level 0: the green cube is already in the jaw, a few centimeters above the tower. All that's left is to lower it, open the jaw and move away." >}}
 
 {{< figure src="skill_map.png" alt="Heatmaps of success at each curriculum level over training, one panel per arm: gamma 0.97, 0.95, 0.99 and 0.99 unscaled" caption="Success at every level over training, averaged over seeds. At 0.97 and 0.95, level 0 is the first one learned, and the other levels follow. At 0.99, level 0 comes late: seed by seed with reward scaling, and not before ~105M steps without it." >}}
 
@@ -222,7 +228,7 @@ gaps are small by design.)
    2,800 at 0.99, against 930 at 0.97.
 2. Post-release states are rare, so the critic undervalues them, and the occasional release
    gets a negative advantage.
-3. Because the policy never practises what comes after the release, releasing really doesn't
+3. Because the policy never practices what comes after the release, releasing really doesn't
    pay for it. The trap closes.
 
 Why 0.99 and not 0.97 is the part I couldn't measure directly. There's no frozen 0.97 policy to
@@ -292,9 +298,9 @@ caveats. Further out is the sim-to-real project that motivated the series in the
 
 ## References
 
-- Andrychowicz et al. (2021). *What Matters for On-Policy Deep Actor-Critic Methods? A
-  Large-Scale Study.* ICLR.
-- Engstrom, Ilyas, Santurkar, Tsipras, Janoos, Rudolph, Madry (2020). *Implementation Matters
-  in Deep Policy Gradients: A Case Study on PPO and TRPO.* ICLR.
-- Schulman, Moritz, Levine, Jordan, Abbeel (2016). *High-Dimensional Continuous Control Using
-  Generalized Advantage Estimation.* ICLR.
+- Andrychowicz et al. (2021). [*What Matters for On-Policy Deep Actor-Critic Methods? A
+  Large-Scale Study.*](https://arxiv.org/abs/2006.05990) ICLR.
+- Engstrom, Ilyas, Santurkar, Tsipras, Janoos, Rudolph, Madry (2020). [*Implementation Matters
+  in Deep Policy Gradients: A Case Study on PPO and TRPO.*](https://arxiv.org/abs/2005.12729) ICLR.
+- Schulman, Moritz, Levine, Jordan, Abbeel (2016). [*High-Dimensional Continuous Control Using
+  Generalized Advantage Estimation.*](https://arxiv.org/abs/1506.02438) ICLR.
