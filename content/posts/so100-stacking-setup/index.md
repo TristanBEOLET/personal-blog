@@ -6,6 +6,7 @@ draft: false
 series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "mujoco"]
 description: "Why I trained a simulated SO-100 arm to build a three-cube tower with PPO, how the setup works, and how a physics setting silently broke training for days."
+images: ["levels.png"]
 ---
 
 This is the first post of a series about teaching a simulated SO-100 robot arm to build a

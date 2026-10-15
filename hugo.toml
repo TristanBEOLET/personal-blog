@@ -10,6 +10,8 @@ theme = "PaperMod"
   ShowCodeCopyButtons = true
   ShowPostNavLinks = true
   math = true
+  description = "Write-ups of things I build, break and fix: AI, robotics, reinforcement learning and homelabbing, with the code and the failed attempts."
+  images = ["/images/og-default.png"]
 
   [params.assets]
     favicon = "/favicon.svg"

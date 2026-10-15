@@ -6,6 +6,7 @@ draft: false
 series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "curriculum"]
 description: "Curriculum vs no curriculum on a three-cube stacking task, 5 seeds each: the easy start states matter, the schedule doesn't."
+images: ["learning_curve.png"]
 ---
 
 Second post of the series about teaching a simulated SO-100 arm to build a three-cube tower.

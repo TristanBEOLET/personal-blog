@@ -4,6 +4,7 @@ date: 2023-10-16
 draft: false
 tags: ["rl", "paper"]
 description: "My first paper: training offline RL agents on real closed-loop data for type 1 diabetes, and personalizing them per patient without a simulator."
+images: ["control-example.png"]
 ---
 
 My first paper is on arXiv:

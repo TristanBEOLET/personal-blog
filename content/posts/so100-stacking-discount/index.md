@@ -6,6 +6,7 @@ draft: false
 series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "discount"]
 description: "Changing PPO's discount factor on a three-cube stacking task: 0.97 beats 0.95 and 0.99, and the 0.99 runs freeze with a cube in the jaw. My prediction was the opposite."
+images: ["learning_curve.png"]
 ---
 
 Fourth post of the series about teaching a simulated SO-100 arm to build a three-cube tower.

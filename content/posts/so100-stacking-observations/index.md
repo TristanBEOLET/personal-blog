@@ -6,6 +6,7 @@ draft: false
 series: ["SO-100 tower stacking"]
 tags: ["rl", "robotics", "observation-space"]
 description: "An observation-space study on a three-cube stacking task: removing the cube orientations took success from 88% to 97% and made learning 3× faster."
+images: ["learning_curve.png"]
 ---
 
 Third post of the series about teaching a simulated SO-100 arm to build a three-cube tower.
