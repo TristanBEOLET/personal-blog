@@ -349,4 +349,4 @@ isn't a reading list I followed. It's what I'd point someone to for this kind of
 With the physics fixed, I could finally ask the question this project started with: does the
 curriculum help? To answer it, every configuration trains from scratch, with five seeds each.
 That's [part 2]({{< relref "posts/so100-stacking-curriculum" >}}). Part 3 looks at what the agent
-needs to observe, and a later post will look at the discount factor.
+needs to observe, and [part 4]({{< relref "posts/so100-stacking-discount" >}}) looks at the discount factor.

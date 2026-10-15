@@ -232,7 +232,7 @@ One parameter I haven't touched yet is the discount factor. With $\gamma = 0.97$
 looks about 33 steps (0.7 s) ahead, in a 500-step task with two picks. Once blue is placed and
 the arm turns to green, the reward for the finished tower is 100+ steps away, and
 $0.97^{100} \approx 0.05$.
-The next post will compare $\gamma = 0.95$, $0.97$ and $0.99$.
+[Part 4]({{< relref "posts/so100-stacking-discount" >}}) compares $\gamma = 0.95$, $0.97$ and $0.99$.
 
 ## References
 
