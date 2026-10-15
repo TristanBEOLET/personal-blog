@@ -117,7 +117,7 @@ The 16 new runs took 12.6 hours on the two RTX 5090s, about $10–30 of GPU time
 
 ## Results: the prediction was wrong
 
-{{< figure src="learning_curve_g99.png" alt="Full-task success vs steps for gamma 0.97, 0.99 and 0.99 without reward scaling, 5 seeds each" caption="Full-task success during training, 5 seeds per arm. Thick lines: mean; bands: 95% bootstrap CI; thin lines: individual seeds. Both 0.99 arms fall far behind 0.97." >}}
+{{< figure src="learning_curve.png" alt="Full-task success vs steps for gamma 0.97, 0.95, 0.99 and 0.99 without reward scaling, 5 seeds each" caption="Full-task success during training, 5 seeds per arm. Thick lines: mean; bands: 95% bootstrap CI; thin lines: individual seeds. 0.95 follows 0.97 about 15M steps behind. Both 0.99 arms fall far behind: only some of their seeds take off, at very different times." >}}
 
 | $\gamma$ | Seeds that learn the task | Time to 10% (median) | AUC | **Final success** |
 |---|---|---|---|---|
@@ -132,7 +132,8 @@ The 16 new runs took 12.6 hours on the two RTX 5090s, about $10–30 of GPU time
   only at 147M steps. Without reward scaling, two out of five do. The seeds that do learn end
   as high as 0.97 (92–99%). So 0.99 doesn't cap performance; it makes reaching it unreliable.
 - **0.95 costs a little but always works.** Every seed learns the task, about 15M steps later
-  than 0.97, and ends a few points lower.
+  than 0.97 (the orange curve runs parallel to the blue one, shifted right), and ends a few
+  points lower.
 - **Reward scaling helps 0.99 a little at most.** Five seeds can't tell the two 0.99 arms apart
   with any confidence.
 
@@ -142,7 +143,7 @@ The 16 new runs took 12.6 hours on the two RTX 5090s, about $10–30 of GPU time
 
 The phase plot shows how far the full-task episodes get:
 
-{{< figure src="phase_reached.png" alt="Fraction of full-task episodes reaching each phase over training, for gamma 0.97, 0.99 and 0.99 unscaled" caption="Fraction of full-task episodes ending at each phase or beyond. Every arm learns to place blue early. At 0.99, the green cube then stays unstacked in most episodes for 100M+ steps." >}}
+{{< figure src="phase_reached.png" alt="Fraction of full-task episodes reaching each phase over training, one panel per arm: gamma 0.97, 0.95, 0.99 and 0.99 unscaled" caption="Fraction of full-task episodes ending at each phase or beyond. Every arm learns to place blue early. At 0.97 and 0.95, placing green follows within 10–20M steps. At 0.99, the green cube then stays unstacked in most episodes for 100M+ steps." >}}
 
 The failing 0.99 seeds place blue early (without reward scaling, about as fast as 0.97). Then they sit at "green never
 placed" for 100M steps or more. That looks like the wall from part 2: going to get the second
@@ -153,9 +154,12 @@ matters is the easiest one:
 
 {{< figure src="level_0.png" alt="Simulated SO-100 arm holding the green cube in its jaw just above a two-cube tower" caption="Level 0: the green cube is already in the jaw, a few centimetres above the tower. All that's left is to lower it, open the jaw and move away." >}}
 
-{{< figure src="skill_map.png" alt="Heatmaps of success at each curriculum level over training for gamma 0.97, 0.95 and 0.99 unscaled" caption="Success at every level over training, averaged over seeds. At 0.97 and 0.95, level 0 is the first one learned. At 0.99 (unscaled), it stays at zero for 100M steps." >}}
+{{< figure src="skill_map.png" alt="Heatmaps of success at each curriculum level over training, one panel per arm: gamma 0.97, 0.95, 0.99 and 0.99 unscaled" caption="Success at every level over training, averaged over seeds. At 0.97 and 0.95, level 0 is the first one learned, and the other levels follow. At 0.99, level 0 comes late: seed by seed with reward scaling, and not before ~105M steps without it." >}}
 
-At 0.97, every seed learns level 0 first, at 25–60M steps. At 0.99, the failing seeds stay at
+At 0.97, every seed learns level 0 first, at 25–60M steps, and 0.95 does the same. At 0.99,
+level 0 becomes a lottery of its own. With reward scaling, the seeds learn it at about 40M,
+80M, 110M and 150M steps, and one never does. Without it, two seeds learn it between 105M and
+150M, one reaches 63% by the end, and two never do. The failing seeds stay at
 **0% on level 0**, with a mean phase of exactly 2.00: the policy holds the green cube above the
 tower for the whole episode and never lets go. That's a clean freeze, the very behavior the
 return table was about, at the level where letting go is the only thing left to do.
