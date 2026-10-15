@@ -1,0 +1,30 @@
+{{- /* Overrides PaperMod's post_nav_links.html. PaperMod links by date with "Prev" pointing
+  to the newer post. Here "Prev" is the older post and "Next" the newer one, and posts in a
+  series link only within that series, in part order (as in series_nav.html). */ -}}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- with .GetTerms "series" }}
+  {{- $pages = (index . 0).Pages }}
+{{- end }}
+{{- $pages = $pages.ByDate }}
+{{- $index := -1 }}
+{{- range $i, $p := $pages }}{{ if eq $p $ }}{{ $index = $i }}{{ end }}{{ end }}
+{{- if and (gt (len $pages) 1) (ge $index 0) }}
+<nav class="paginav">
+  {{- if gt $index 0 }}
+  {{- with index $pages (sub $index 1) }}
+  <a class="prev" href="{{ .Permalink }}">
+    <span class="title">« {{ i18n "prev_page" }}</span>
+    <span>{{- .Name -}}</span>
+  </a>
+  {{- end }}
+  {{- end }}
+  {{- if lt $index (sub (len $pages) 1) }}
+  {{- with index $pages (add $index 1) }}
+  <a class="next" href="{{ .Permalink }}">
+    <span class="title">{{ i18n "next_page" }} »</span>
+    <span>{{- .Name -}}</span>
+  </a>
+  {{- end }}
+  {{- end }}
+</nav>
+{{- end }}
