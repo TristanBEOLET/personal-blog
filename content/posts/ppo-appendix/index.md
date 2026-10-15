@@ -2,9 +2,12 @@
 title: "Appendix: how PPO works, and how Brax implements it"
 linkTitle: "Appendix: how PPO works"
 date: 2026-10-15T11:00:00+02:00
+series: ["SO-100 tower stacking"]
+seriesAppendix: true
 draft: false
 tags: ["rl", "ppo", "theory"]
 description: "The theory behind the SO-100 stacking series: policy gradients, advantages and GAE, the clipped PPO objective, squashed Gaussian actions, and where Brax's implementation differs from the textbook and from Stable-Baselines3."
+images: ["social-card.png"]
 ---
 
 Every run in the [SO-100 stacking series]({{< relref "series/so-100-tower-stacking" >}})
@@ -14,6 +17,12 @@ appendix does, from the policy gradient up to the exact loss Brax computes, with
 hyperparameters the series used.
 
 <!--more-->
+
+> **TL;DR**
+>
+> - The pieces the series relies on, from the policy gradient up: advantages and GAE, the clipped PPO objective, the tanh-squashed Gaussian policy, observation normalization.
+> - Where Brax differs from textbook PPO: 10-step advantage windows, a V-trace style advantage, no observation clipping by default.
+> - The series' exact hyperparameters, and a Brax vs Stable-Baselines3 comparison.
 
 Each section gives the equation, then what it means intuitively, then, where it matters,
 how the implementations used in the series differ from the textbook version. Nothing here is
@@ -274,7 +283,7 @@ $$
 The statistics are part of the policy: they're saved with the weights, and a policy evaluated
 with different statistics sees different inputs. With no clipping, as in the series'
 configuration, a few extreme values can wreck them. That was the bug of
-[part 1]({{< relref "posts/so100-stacking-setup" >}}): cubes thrown hundreds of metres away
+[part 1]({{< relref "posts/so100-stacking-setup" >}}): cubes thrown hundreds of meters away
 inflated $\sigma_\text{running}$, and the policy saw every cube in the wrong place.
 
 ## One PPO iteration, with the series' numbers
@@ -331,18 +340,18 @@ Two of these mattered directly in the series:
 
 ## References
 
-- Sutton, Barto (2018). *Reinforcement Learning: An Introduction*, 2nd edition. Chapter 13 for
+- Sutton, Barto (2018). [*Reinforcement Learning: An Introduction*](http://incompleteideas.net/book/the-book-2nd.html), 2nd edition. Chapter 13 for
   policy gradients.
-- Schulman, Levine, Moritz, Jordan, Abbeel (2015). *Trust Region Policy Optimization.* ICML.
-- Schulman, Moritz, Levine, Jordan, Abbeel (2016). *High-Dimensional Continuous Control Using
-  Generalized Advantage Estimation.* ICLR.
-- Schulman, Wolski, Dhariwal, Radford, Klimov (2017). *Proximal Policy Optimization
-  Algorithms.* arXiv:1707.06347.
-- Espeholt et al. (2018). *IMPALA: Scalable Distributed Deep-RL with Importance Weighted
-  Actor-Learner Architectures.* ICML. The origin of Brax's V-trace style advantage.
-- Haarnoja, Zhou, Abbeel, Levine (2018). *Soft Actor-Critic.* ICML. Appendix C for the
+- Schulman, Levine, Moritz, Jordan, Abbeel (2015). [*Trust Region Policy Optimization.*](https://arxiv.org/abs/1502.05477) ICML.
+- Schulman, Moritz, Levine, Jordan, Abbeel (2016). [*High-Dimensional Continuous Control Using
+  Generalized Advantage Estimation.*](https://arxiv.org/abs/1506.02438) ICLR.
+- Schulman, Wolski, Dhariwal, Radford, Klimov (2017). [*Proximal Policy Optimization
+  Algorithms.*](https://arxiv.org/abs/1707.06347) arXiv:1707.06347.
+- Espeholt et al. (2018). [*IMPALA: Scalable Distributed Deep-RL with Importance Weighted
+  Actor-Learner Architectures.*](https://arxiv.org/abs/1802.01561) ICML. The origin of Brax's V-trace style advantage.
+- Haarnoja, Zhou, Abbeel, Levine (2018). [*Soft Actor-Critic.*](https://arxiv.org/abs/1801.01290) ICML. Appendix C for the
   tanh-squashed Gaussian.
-- Huang et al. (2022). *The 37 Implementation Details of Proximal Policy Optimization.* ICLR
+- Huang et al. (2022). [*The 37 Implementation Details of Proximal Policy Optimization.*](https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/) ICLR
   Blog Track. A detailed tour of what PPO implementations actually do.
-- Freeman et al. (2021). *Brax: A Differentiable Physics Engine for Large Scale Rigid Body
-  Simulation.* NeurIPS Datasets and Benchmarks.
+- Freeman et al. (2021). [*Brax: A Differentiable Physics Engine for Large Scale Rigid Body
+  Simulation.*](https://arxiv.org/abs/2106.13281) NeurIPS Datasets and Benchmarks.

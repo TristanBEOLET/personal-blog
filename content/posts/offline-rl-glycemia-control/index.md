@@ -4,6 +4,7 @@ date: 2023-10-16
 draft: false
 tags: ["rl", "paper"]
 description: "My first paper: training offline RL agents on real closed-loop data for type 1 diabetes, and personalizing them per patient without a simulator."
+images: ["social-card.png"]
 ---
 
 My first paper is on arXiv:
@@ -12,6 +13,12 @@ I'm the first author, with Alice Adenis, Erik Huneker and Maxime Louis, from our
 This post walks through what we did and why, without the full formality of the paper.
 
 <!--more-->
+
+> **TL;DR**
+>
+> - Offline RL trained only on logged data, with no simulator in training: 6.9 million real transitions from 100 patients using the DBLG1 closed loop.
+> - TD3-BC was the best of three algorithms, with 74.4% time in range against 69.9% for the existing controller (in simulation), and less time below range.
+> - Fitted Q evaluation turns clinical metrics into Q-values, so per-patient fine-tuning can be checked without a simulator. The worst patient's estimated time in range went from 38% to 50%.
 
 ## Background: closing the loop
 
@@ -50,7 +57,7 @@ an existing policy, with no exploration. That fits this setting well:
 
 **Data.** We used real-life data from the DBLG1 closed loop, which equips more than 10,000
 patients. We randomly picked 100 patients who had agreed to share their data, and kept only
-days where the closed loop was active more than 70 % of the time: 6.9 million transitions in
+days where the closed loop was active more than 70% of the time: 6.9 million transitions in
 total, with patients observed for about 284 days on average. The behavior policy isn't exactly
 the DBLG1 algorithm: patients sometimes modify or add boluses, and adjust some parameters. We
 see this as a benefit, because it widens the range of actions in the data.
@@ -109,10 +116,10 @@ stayed within clinical targets:
 
 | | Time in range (70–180) | Below 70 | Below 54 | Above 180 | Mean glycemia |
 |---|---|---|---|---|---|
-| Behavior policy | 69.9 % | 3.6 % | 1.4 % | 26.5 % | 156.6 mg/dL |
-| BCQ | 70.4 % | 3.9 % | 1.0 % | 25.7 % | 147.9 mg/dL |
-| CQL | 57.8 % | 9.9 % | 5.1 % | 32.3 % | 150.8 mg/dL |
-| **TD3-BC** | **74.4 %** | **2.7 %** | **0.9 %** | **22.9 %** | 148.6 mg/dL |
+| Behavior policy | 69.9% | 3.6% | 1.4% | 26.5% | 156.6 mg/dL |
+| BCQ | 70.4% | 3.9% | 1.0% | 25.7% | 147.9 mg/dL |
+| CQL | 57.8% | 9.9% | 5.1% | 32.3% | 150.8 mg/dL |
+| **TD3-BC** | **74.4%** | **2.7%** | **0.9%** | **22.9%** | 148.6 mg/dL |
 
 Looking at a simulated day shows *how* the agent differs:
 
@@ -124,14 +131,14 @@ the bolus.
 
 We also tested the harder case of **unannounced meals**: no meal bolus and no carbohydrate
 information, so the agent has to react to glycemia alone. Compared with the behavior policy,
-the RL agent raised time in range by 8.0 %, cut time below range by 6.1 % and lowered mean
-glycemia by 13.2 mg/dL. It's an early step towards a loop that doesn't need patients
+the RL agent raised time in range by 8.0%, cut time below range by 6.1% and lowered mean
+glycemia by 13.2 mg/dL. It's an early step toward a loop that doesn't need patients
 to declare their meals.
 
 ## Personalization without a simulator
 
 Current closed loops vary a lot from one patient to the next: in our simulations, time in range
-ranged from about 50 % to over 80 %. The natural next step is to fine-tune the population agent
+ranged from about 50% to over 80%. The natural next step is to fine-tune the population agent
 on each patient's own data. But how do you check that a personalized agent is better, if you
 don't trust a simulator and can't test on the patient?
 
@@ -180,7 +187,7 @@ about three months of data went into fine-tuning.
 On average, the estimated training reward went up and time in range improved by about one
 point, while time below and above range stayed essentially flat. The
 clearest gain is for the patients who needed it most: the lowest estimated time in range went
-from 38 % to 50 %.
+from 38% to 50%.
 
 To check that the agents learned something sensible, we used a simple fact: insulin has its
 largest effect about 30 minutes after delivery. So if glycemia was high 30 minutes later in the
