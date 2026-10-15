@@ -7,7 +7,7 @@ seriesAppendix: true
 draft: false
 tags: ["rl", "ppo", "theory"]
 description: "The theory behind the SO-100 stacking series: policy gradients, advantages and GAE, the clipped PPO objective, squashed Gaussian actions, and where Brax's implementation differs from the textbook and from Stable-Baselines3."
-images: ["ppo_clip.png"]
+images: ["social-card.png"]
 ---
 
 Every run in the [SO-100 stacking series]({{< relref "series/so-100-tower-stacking" >}})

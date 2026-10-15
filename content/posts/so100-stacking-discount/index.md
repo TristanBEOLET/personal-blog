@@ -11,7 +11,7 @@ images: ["learning_curve.png"]
 
 Fourth post of the series about teaching a simulated SO-100 arm to build a three-cube tower.
 
-This one is about the discount factor $\gamma$, the number that sets how far ahead the agent
+This one is about the discount factor γ (gamma), the number that sets how far ahead the agent
 looks. I wrote down a prediction before running anything, backed by a small calculation. It
 was wrong, and finding out why turned out to be the most interesting part of the study.
 
