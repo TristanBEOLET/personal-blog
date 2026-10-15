@@ -43,6 +43,14 @@ theme = "PaperMod"
     name = "About"
     url = "/about/"
     weight = 3
+  [[menu.main]]
+    identifier = "search"
+    name = "Search"
+    pageRef = "/search"
+    weight = 4
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
 
 [markup.goldmark.extensions.passthrough]
   enable = true
